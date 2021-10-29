@@ -91,6 +91,10 @@ button:active {
   background: white;
 }
 
+.draggable {
+  background-color: #ffe0ef;
+}
+
 #active-projects {
   border: 1px solid #870099;
 }
