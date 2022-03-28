@@ -20,8 +20,23 @@ const entryText=document.getElementById('entry-text');
 const ul=document.getElementById('movie-list');
 const deleteModal=document.getElementById('delete-modal');
 
-addNewMovieElement(movies[0].id,movies[0].title,movies[0].image,movies[0].rating);
-addNewMovieElement(movies[1].id,movies[1].title,movies[1].image,movies[1].rating);
+
+let localmovies=JSON.parse(localStorage.getItem('movie'));
+let firstTime = localStorage.getItem("first_time");
+if(!firstTime) {    
+    localStorage.setItem("first_time",1);
+	for(let i=0;i<movies.length;i++){
+		addNewMovieElement(movies[i].id,movies[i].title,movies[i].image,movies[i].rating);
+	}
+	localStorage.setItem('movie',JSON.stringify(movies));
+	localmovies=JSON.parse(localStorage.getItem('movie'));	
+}
+else{
+	for(let i of localmovies){
+	addNewMovieElement(i.id,i.title,i.image,i.rating);
+	}
+}	
+
 
 addBtn.addEventListener('click',showMovieModal);
 cancelAddMovieBtn.addEventListener('click',removeMovieModal);
@@ -64,6 +79,7 @@ function addMovieHandler(){
 		rating:ratingValue
 	}
 	movies.push(newMovie);
+	localStorage.setItem('movie',JSON.stringify(movies));
 	console.log(movies);
 	removeMovieModal();
 	clearUi();
@@ -126,6 +142,7 @@ function deleteMovie(movieid){
 		index++;
 	}
 	movies.splice(index);
+	localStorage.setItem('movie',JSON.stringify(movies));
 	ul.children[index].remove();
 	toggleBackdrop();
 	deleteModal.classList.remove('visible');
