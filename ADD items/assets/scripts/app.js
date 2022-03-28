@@ -4,12 +4,24 @@ const backdrop=document.querySelector('#backdrop');
 const cancelAddMovieBtn=document.querySelector('.btn--passive');
 const confirmAddMovieBtn=document.querySelector('.btn--success');
 const userInputs=addMoviemodal.querySelectorAll('input');
-const movies=[];
+const movies=[{
+		id:Math.random().toString(),
+		title:'Avengers: Endgame',
+		image:'https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg?region=0%2C0%2C540%2C810',
+		rating:5
+	},
+	{
+		id:Math.random().toString(),
+		title:'Spider-Man Far From Home',
+		image:'https://upload.wikimedia.org/wikipedia/en/b/bd/Spider-Man_Far_From_Home_poster.jpg',
+		rating:4
+	}];
 const entryText=document.getElementById('entry-text');
 const ul=document.getElementById('movie-list');
 const deleteModal=document.getElementById('delete-modal');
 
-
+addNewMovieElement(movies[0].id,movies[0].title,movies[0].image,movies[0].rating);
+addNewMovieElement(movies[1].id,movies[1].title,movies[1].image,movies[1].rating);
 
 addBtn.addEventListener('click',showMovieModal);
 cancelAddMovieBtn.addEventListener('click',removeMovieModal);
@@ -80,7 +92,7 @@ function addNewMovieElement(id,title,image,rating){
 	newElement.className='movie-element';
 	newElement.innerHTML=`
 	<div class='movie-element__image'>
-	<img src='' alt='${title}'>
+	<img src='${image}' alt='${title}'>
 	</div>
 	<div class="movie-element__info">
 		<h2>${title}</h2>
